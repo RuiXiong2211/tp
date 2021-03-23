@@ -13,7 +13,7 @@ public class Request {
      */
     public Request(String request) {
         requireNonNull(request);
-        value = request;
+        value = "Request: " + request;
     }
 
     @Override
