@@ -9,6 +9,7 @@ import static seedu.cakecollate.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
+    public static final String MESSAGE_OVERFLOW = "Tags cannot exceed 30 characters.";
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 

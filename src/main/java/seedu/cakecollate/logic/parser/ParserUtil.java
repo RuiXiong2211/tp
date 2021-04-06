@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.cakecollate.commons.core.Messages;
 import seedu.cakecollate.commons.core.index.Index;
 import seedu.cakecollate.commons.core.index.IndexList;
 import seedu.cakecollate.commons.util.StringUtil;
@@ -27,6 +28,11 @@ import seedu.cakecollate.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final int PHONE_LENGTH = 20;
+    public static final int TAG_LENGTH = 30;
+    public static final int ADDRESS_LENGTH = 255;
+    public static final int EMAIL_LENGTH = 255;
+    public static final int INTEGER_LENGTH = 10;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -34,9 +40,12 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+        String trimmedIndex = oneBasedIndex.trim();;
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (trimmedIndex.length() > INTEGER_LENGTH) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -69,6 +78,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (trimmedName.isEmpty()) {
+            throw new ParseException(Name.MESSAGE_EMPTY);
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -87,6 +99,9 @@ public class ParserUtil {
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+        if (phone.length() > PHONE_LENGTH) {
+            throw new ParseException(Phone.MESSAGE_OVERFLOW);
+        }
         return new Phone(trimmedPhone);
     }
 
@@ -102,6 +117,9 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedAddress.length() > ADDRESS_LENGTH) {
+            throw new ParseException(Address.MESSAGE_OVERFLOW);
+        }
         return new Address(trimmedAddress);
     }
 
@@ -116,6 +134,9 @@ public class ParserUtil {
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedEmail.length() > EMAIL_LENGTH) {
+            throw new ParseException(Email.MESSAGE_OVERFLOW);
         }
         return new Email(trimmedEmail);
     }
@@ -161,6 +182,9 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedTag.length() > TAG_LENGTH) {
+            throw new ParseException(Tag.MESSAGE_OVERFLOW);
         }
         return new Tag(trimmedTag);
     }

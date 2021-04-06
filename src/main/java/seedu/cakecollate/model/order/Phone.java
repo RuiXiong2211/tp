@@ -9,9 +9,9 @@ import static seedu.cakecollate.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
+    public static final String MESSAGE_OVERFLOW = "Phone number can contain at most 20 digits.";
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+            "ERROR: Phone numbers should only contain numbers, and it should be at least 3 digits long.";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 

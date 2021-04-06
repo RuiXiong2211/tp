@@ -51,6 +51,7 @@ public class DeleteCommand extends Command {
         List<Order> lastShownList = model.getFilteredOrderList();
         List<Order> ordersToDelete = new ArrayList<>();
         for (Index targetIndex:this.targetIndexList.getIndexList()) {
+
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
             }

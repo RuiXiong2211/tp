@@ -58,7 +58,7 @@ public class RequestCommand extends Command {
         Order orderToEdit = lastShownList.get(index.getZeroBased());
         Order editedOrder = new Order(orderToEdit.getName(), orderToEdit.getPhone(), orderToEdit.getEmail(),
                 orderToEdit.getAddress(), orderToEdit.getOrderDescriptions(),
-                orderToEdit.getTags(), orderToEdit.getDeliveryDate(), request);
+                orderToEdit.getTags(), orderToEdit.getDeliveryDate(), orderToEdit.getDeliveryStatus(), request);
 
         model.setOrder(orderToEdit, editedOrder);
         model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
