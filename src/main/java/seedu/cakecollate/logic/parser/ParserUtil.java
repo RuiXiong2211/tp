@@ -40,13 +40,17 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();;
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
+        String trimmedIndex = oneBasedIndex.trim();
+        System.out.println(trimmedIndex);
         if (trimmedIndex.length() > INTEGER_LENGTH) {
+            System.out.println("enter");
             throw new ParseException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            System.out.println("enter2");
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        System.out.println("enter3");
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 

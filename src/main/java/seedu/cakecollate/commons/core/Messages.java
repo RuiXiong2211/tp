@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s\n%2$s";
     public static final String MESSAGE_INVALID_ORDER_DISPLAYED_INDEX = "The order index provided is invalid";
     public static final String MESSAGE_INVALID_ORDER_ITEM_INDEX = "The order item index provided is invalid";
     // shouldn't all these be more descriptive...

@@ -9,9 +9,8 @@ import static seedu.cakecollate.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final String MESSAGE_CONSTRAINTS = "ERROR: Name cannot exceed 80 characters.";
     public static final String MESSAGE_EMPTY = "ERROR: Name cannot be blank.";
-    public static final String MESSAGE_CONSTRAINTS =
-            "ERROR: Name cannot exceed 80 characters.";
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
