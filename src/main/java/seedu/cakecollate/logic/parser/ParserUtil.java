@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.cakecollate.commons.core.Messages;
 import seedu.cakecollate.commons.core.index.Index;
 import seedu.cakecollate.commons.core.index.IndexList;
 import seedu.cakecollate.commons.util.StringUtil;
@@ -29,7 +30,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final int PHONE_LENGTH = 20;
     public static final int TAG_LENGTH = 30;
-
     public static final int INTEGER_LENGTH = 10;
     public static final int NAME_LENGTH = 80;
 
@@ -40,6 +40,9 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.length() > INTEGER_LENGTH) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }

@@ -4,6 +4,7 @@ import static seedu.cakecollate.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import static seedu.cakecollate.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.cakecollate.logic.parser.CliSyntax.PREFIX_REQUEST;
 
+import seedu.cakecollate.commons.core.Messages;
 import seedu.cakecollate.commons.core.index.Index;
 import seedu.cakecollate.commons.exceptions.IllegalValueException;
 import seedu.cakecollate.logic.commands.RequestCommand;
@@ -23,9 +24,17 @@ public class RequestCommandParser implements Parser<RequestCommand> {
                 PREFIX_REQUEST);
 
         Index index;
+        String preamble;
+        boolean allDigitsAndLengthMoreThanTen = false;
         try {
+            preamble = argMultimap.getPreamble();
+            allDigitsAndLengthMoreThanTen = preamble.chars().allMatch(Character::isDigit)
+                    && preamble.length() > ParserUtil.INTEGER_LENGTH;
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
+            if (allDigitsAndLengthMoreThanTen) {
+                throw new ParseException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RequestCommand.MESSAGE_USAGE), ive);
         }

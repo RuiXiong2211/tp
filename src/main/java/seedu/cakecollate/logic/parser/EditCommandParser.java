@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.cakecollate.commons.core.Messages;
 import seedu.cakecollate.commons.core.index.Index;
 import seedu.cakecollate.logic.commands.EditCommand;
 import seedu.cakecollate.logic.commands.EditCommand.EditOrderDescriptor;
@@ -40,10 +41,17 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ORDER_DESCRIPTION, PREFIX_TAG, PREFIX_DATE, PREFIX_REQUEST);
 
         Index index;
-
+        String preamble;
+        boolean allDigitsAndLengthMoreThanTen = false;
         try {
+            preamble = argMultimap.getPreamble();
+            allDigitsAndLengthMoreThanTen = preamble.chars().allMatch(Character::isDigit)
+                    && preamble.length() > ParserUtil.INTEGER_LENGTH;
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            if (allDigitsAndLengthMoreThanTen) {
+                throw new ParseException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
