@@ -75,6 +75,7 @@ public class RequestCommand extends Command {
     private String generateSuccessMessage(Order editedOrder, Order orderToEdit) {
         boolean isEmptyRequest = request.isRequestEmpty();
         boolean isOrderRequestCurrentlyEmpty = orderToEdit.getRequest().isRequestEmpty;
+
         if (isOrderRequestCurrentlyEmpty && isEmptyRequest) {
             return String.format(MESSAGE_DELETE_REQUEST_SUCCESS_EMPTY);
         }
